@@ -4,14 +4,16 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ProgressBarComponent } from './componentes/progress-bar/progress-bar.component';
-import { CountdownComponent } from './componentes/countdown/countdown.component';
 import { FormsModule } from '@angular/forms';
+import { DisplayComponent } from './componentes/display/display.component';
+import { TimerComponent } from './componentes/timer/timer.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ProgressBarComponent,
-    CountdownComponent
+    DisplayComponent,
+    TimerComponent
   ],
   imports: [
     BrowserModule,
