@@ -20,5 +20,5 @@ export class AppComponent {
   countdownFinish(){
     console.log ('finis')
   }
-  title = 'ComponentesNivelPro';
+ 
 }

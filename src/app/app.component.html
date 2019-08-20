@@ -1,5 +1,9 @@
 <app-progress-bar [progress] = "counterProgress"></app-progress-bar>
-<app-countdown [init] = "totalCountdown"
+<!-- Agrego un templeta de referencia  -->
+<app-countdown #compCountdow 
+[init]= "totalCountdown"
 (onDecrease)="updateProgress($event)"
 (onComplete)="countdownFinish()"></app-countdown>
+<!-- Creamos el botón para reinicilizar el contador -->
+<button (click)="compCountdow.startCountdown(); counterProgress = 0;" >Restaurar</button>
 <router-outlet></router-outlet>

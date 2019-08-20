@@ -10,6 +10,7 @@ export class CountdownComponent implements OnInit {
   @Output() onDecrease = new EventEmitter<number>();
   @Output() onComplete = new EventEmitter<void>();
   public counter: number = 0;
+  private countdownTimeRef: any = null;
 
   constructor() { }
 
@@ -18,27 +19,32 @@ export class CountdownComponent implements OnInit {
 
   startCountdown() {
     if (this.init && this.init > 0) {
+      this.clearTimeout();
       this.counter = this.init;
       this.doCountdown();
     }
   }
 
   doCountdown() {
-
-    setTimeout(() => {
+    this.countdownTimeRef = setTimeout(() => {
       this.counter = this.counter - 1;
       this.precessCountdown();
-
     }, 1000);
 
   }
 
+ private clearTimeout() {
+    if(this.countdownTimeRef) {
+      clearTimeout(this.countdownTimeRef);
+      this.countdownTimeRef = null;
+    }
+  }
 
   precessCountdown() {
 
     this.onDecrease.emit(this.counter);
     if (this.counter == 0) {
-    this.onComplete.emit();
+      this.onComplete.emit();
 
     } else {
       this.doCountdown();
