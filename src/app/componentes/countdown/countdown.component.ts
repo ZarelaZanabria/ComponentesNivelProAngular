@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter , OnDestroy, OnChanges } from '@angular/core';
 @Component({
   selector: 'app-countdown',
   templateUrl: './countdown.component.html',
@@ -54,6 +54,16 @@ export class CountdownComponent implements OnInit {
 
   ngOnInit() {
     this.startCountdown();
+  }
+
+  ngOnDestroy ():void{
+    this.clearTimeout();
+
+  }
+  ngOnChanges(changes) : void{
+  // Cuando detectamos el cambio del valor init, ejecutar la funcion de reiniciar contador.
+console.log('Cuando inicia el evento', changes.init.currentValue);
+this.startCountdown();
   }
 
 }
