@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +10,12 @@ export class TimerService {
   public countdown: number = 0;
   public paused: boolean = true;
   private init: number = 0;
+
+  //Te permite emitir eventos
+  private timeSubject = new Subject<void>(); 
+  private 
+  //Solo es un observable
+  public timeObservable = this.timeSubject.asObservable();
 
   constructor() {
 
@@ -23,19 +30,17 @@ export class TimerService {
 
     console.log('Si ejecuta la función');
     console.log(time);
-   
-    if (time) 
+
+    if (time)
       this.init = time;
-      console.log(this.init, '01');    
-   
+
     if (this.init && this.init > 0) {
-      console.log(this.init, '02');
       this.paused = true;
       this.clearTimeout();
       this.countdown = this.init;
     }
-   
-    
+
+
   }
 
   toogleCountdown() {
@@ -49,28 +54,30 @@ export class TimerService {
 
   doCountdown() {
     this.countdownTimerRef = setTimeout(() => {
-      console.log('countendw', this.countdown);
-
       this.countdown = this.countdown - 1;
       this.precessCountdown();
     }, 1000);
   }
 
-  private clearTimeout() {
-    if (this.countdownTimerRef) {
-      clearTimeout(this.countdownTimerRef);
-      this.countdownTimerRef = null;
-    }
-  }
+
   precessCountdown() {
 
     if (this.countdown <= 0) {
+      
+      //Con next emitimos un evento
+      this.timeSubject.next();
       /*this.onComplete.emit(); */
       console.log('---Contador end--');
     } else {
       this.doCountdown();
     }
 
+  }
+  private clearTimeout() {
+    if (this.countdownTimerRef) {
+      clearTimeout(this.countdownTimerRef);
+      this.countdownTimerRef = null;
+    }
   }
 
 }
