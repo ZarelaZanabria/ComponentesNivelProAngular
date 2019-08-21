@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Subject, BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -7,15 +7,18 @@ import { Subject } from 'rxjs';
 export class TimerService {
 
   private countdownTimerRef: any = null;
-  public countdown: number = 0;
+  
   public paused: boolean = true;
   private init: number = 0;
-
   //Te permite emitir eventos
-  private timeSubject = new Subject<void>(); 
-  private 
+  private timeSubject = new Subject<void>();   
   //Solo es un observable
   public timeObservable = this.timeSubject.asObservable();
+  //Contador de manera reactiva el microservicio indi
+  private countdownSource = new BehaviorSubject<number>(0);
+  public countdownObservable = this.countdownSource.asObservable();
+
+
 
   constructor() {
 
@@ -37,7 +40,8 @@ export class TimerService {
     if (this.init && this.init > 0) {
       this.paused = true;
       this.clearTimeout();
-      this.countdown = this.init;
+      this.countdownSource.next(this.init);
+      /* this.countdown = this.init; */
     }
 
 
@@ -54,7 +58,9 @@ export class TimerService {
 
   doCountdown() {
     this.countdownTimerRef = setTimeout(() => {
-      this.countdown = this.countdown - 1;
+      //Utilizamos el valor de next para pasar información.
+      this.countdownSource.next(this.countdownSource.getValue() -1 );
+    /*   this.countdown = this.countdown - 1; */
       this.precessCountdown();
     }, 1000);
   }
@@ -62,7 +68,7 @@ export class TimerService {
 
   precessCountdown() {
 
-    if (this.countdown <= 0) {
+    if (this.countdownSource.getValue() <= 0) {
       
       //Con next emitimos un evento
       this.timeSubject.next();
