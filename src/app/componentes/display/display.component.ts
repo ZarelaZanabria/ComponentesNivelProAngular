@@ -18,6 +18,8 @@ export class DisplayComponent implements OnInit , OnChanges {
 
   ngOnChanges(changes){
     if(changes.time){
+
+      console.log(changes.time);
       //Retorna la parte entera de un numero cualquier dijito franccionario
       const minutes = Math.trunc(changes.time.currentValue/60);
       const seconds = changes.time.currentValue - minutes*60;
