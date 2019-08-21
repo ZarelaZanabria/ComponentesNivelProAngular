@@ -31,12 +31,8 @@ export class TimerService {
 
   restarCountdown(time?) {
 
-    console.log('Si ejecuta la función');
-    console.log(time);
-
     if (time)
       this.init = time;
-
     if (this.init && this.init > 0) {
       this.paused = true;
       this.clearTimeout();
@@ -68,8 +64,7 @@ export class TimerService {
 
   precessCountdown() {
 
-    if (this.countdownSource.getValue() <= 0) {
-      
+    if (this.countdownSource.getValue() <= 0) {      
       //Con next emitimos un evento
       this.timeSubject.next();
       /*this.onComplete.emit(); */
