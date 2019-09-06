@@ -15,4 +15,11 @@
     <app-timer init="3" ></app-timer>
     <app-timer init="20" ></app-timer>
     <app-timer init="105" ></app-timer>
+    <button class="add" (click)="showAddTimer()"></button>
+
+    <app-alert-view [hidden]="!isAddTimerVisible"
+    (onCancel)="hideAddTimer()"
+    (onSubmit)="hideAddTimer()">
+
+    </app-alert-view>
 </div>

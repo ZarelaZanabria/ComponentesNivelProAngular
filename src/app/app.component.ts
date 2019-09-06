@@ -6,19 +6,26 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  counterProgress : number = 0;
-  totalCountdown : number = 15 ;
+
+/*   counterProgress : number = 0;
+  totalCountdown : number = 15 ; */
+
+  public isAddTimerVisible : boolean = false;
 
   constructor () {
 
   }
 
-  updateProgress($event){
+ /*  updateProgress($event){
     this.counterProgress =  (this.totalCountdown - $event)/this.totalCountdown * 100 ;
   }
-
-  countdownFinish(){
+ */
+  /* countdownFinish(){
     console.log ('finis')
+  } */
+
+  public showAddTimer (){
+    
   }
  
 }
