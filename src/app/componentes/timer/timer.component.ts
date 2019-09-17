@@ -16,7 +16,7 @@ export class TimerComponent implements OnInit, OnDestroy {
   //Creo la referncia para ya no subcribirmi
 
   private countdownSubcription: Subscription = null;
-  private progressSubcription : Subscription = null;
+  public progressSubcription : Subscription = null;
   public countdown : number = 0;
   /* Importanye los AYSNPIPE solo para HTML por eso nos subcribimos al observable
    */

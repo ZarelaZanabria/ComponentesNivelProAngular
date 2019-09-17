@@ -12,8 +12,7 @@
 
 <div>
     <h1>Timers</h1>
-    <app-timer *ngFor = "let time of timers" init="{{time}}" 
-    (onClomplete)="logCountdowEnd()" ></app-timer>
+    <app-timer *ngFor="let time of timers" init="{{time}}" (onClomplete)="showEndTimerAlert()"></app-timer>
 
     <button class="add" (click)="showAddTimer()">+</button>
 
@@ -23,8 +22,13 @@
         </div>
         <label>Set the number of the seconds for your timer</label>
         <input [(ngModel)]="time" type="number">
-
         <button (click)="hideAddTimer()" class="cancel-button"> Cancel </button>
         <button (click)="submitAddTimer()">OK</button>
+    </app-alert-view>
+    <app-alert-view [hidden]="!isEndTimerAlertVisible">
+        <div header>
+            Finished the process
+        </div>
+        <button (click)="hideEndTimerAlert()">OK</button>
     </app-alert-view>
 </div>
