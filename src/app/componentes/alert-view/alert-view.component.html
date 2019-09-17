@@ -2,15 +2,13 @@
     <div class="background"></div>
     <div class="card">
         <div class="header">
-            Add new Timer
+            <ng-content select="[header]"></ng-content>
         </div>
         <div class="message">
-            <label>Set the number of the seconds for your timer</label>
-            <input [(ngModel)]="time" type="number">
+            <ng-content></ng-content>
         </div>
         <div class="footer">
-            <button (click)="onCancel.emit()" class="cancel-button"> Cancel </button>
-            <button (click)="onSubmit.emit(time)">OK</button>
+            <ng-content select="button"></ng-content>
         </div>
     </div>
 </div>

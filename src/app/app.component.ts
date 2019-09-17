@@ -11,8 +11,11 @@ export class AppComponent {
   totalCountdown : number = 15 ; */
 
   public isAddTimerVisible : boolean = false;
-
+  public isEndTimerAlertVisible : boolean = false;
+  public time : number = 0;
+  public timers : Array<number> = [];
   constructor () {
+    this.timers = [4,16,185];
 
   }
 
@@ -24,8 +27,30 @@ export class AppComponent {
     console.log ('finis')
   } */
 
-  public showAddTimer (){
+  logCountdowEnd() {
+    console.log("The countdown has  finished");
     
+  }
+  public showAddTimer (){
+    this.isAddTimerVisible = true;
+    
+  }
+
+  public hideAddTimer(){
+    this.isAddTimerVisible = false ;
+  }
+
+  public showEndTimerAlert(){
+    this.isEndTimerAlertVisible = true;
+  }
+
+  public hideEndTimerAlert(){
+    this.isEndTimerAlertVisible = false;
+  }
+
+  public submitAddTimer() {
+    this.timers.push(this.time);
+    this.hideAddTimer();
   }
  
 }
