@@ -1,36 +1,46 @@
-import { Component } from '@angular/core';
+import { Component,  ViewChildren,  AfterContentInit, QueryList, AfterViewInit } from '@angular/core';
+import { SimpleAlertViewComponent } from './componentes/simple-alert-view/simple-alert-view.component';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements AfterContentInit, AfterViewInit {
 
-/*   counterProgress : number = 0;
-  totalCountdown : number = 15 ; */
-
+  
+  
   public isAddTimerVisible : boolean = false;
-  public isEndTimerAlertVisible : boolean = false;
   public time : number = 0;
   public timers : Array<number> = [];
+
+  @ViewChildren(SimpleAlertViewComponent) alerts : QueryList<SimpleAlertViewComponent>;
   constructor () {
     this.timers = [4,16,185];
 
   }
 
- /*  updateProgress($event){
-    this.counterProgress =  (this.totalCountdown - $event)/this.totalCountdown * 100 ;
-  }
- */
-  /* countdownFinish(){
-    console.log ('finis')
-  } */
 
   logCountdowEnd() {
     console.log("The countdown has  finished");
     
   }
+  ngAfterViewInit() {
+    this.alerts.forEach(item =>{
+      console.log(item);
+      
+    })
+  }
+  ngAfterContentInit(): void {
+   
+  }
+ /*  ngAfterContentInit(): void {
+   
+    console.log('Alerta',this.alert)
+    this.alert.showAlert();
+    this.alert.title = 'Hi';
+    this.alert.message = 'Hello Word';
+  } */
   public showAddTimer (){
     this.isAddTimerVisible = true;
     
@@ -41,12 +51,10 @@ export class AppComponent {
   }
 
   public showEndTimerAlert(){
-    this.isEndTimerAlertVisible = true;
+    /* this.alert.showAlert(); */
   }
 
-  public hideEndTimerAlert(){
-    this.isEndTimerAlertVisible = false;
-  }
+ 
 
   public submitAddTimer() {
     this.timers.push(this.time);

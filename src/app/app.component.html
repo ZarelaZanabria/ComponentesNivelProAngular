@@ -1,42 +1,35 @@
-<!-- <app-progress-bar [progress]="counterProgress"></app-progress-bar> -->
-<!-- Agrego un templeta de referencia  -->
-<!-- <app-countdown #compCountdow [init]="totalCountdown" (onDecrease)="updateProgress($event)"
-    (onComplete)="countdownFinish()"></app-countdown>
-<div class="initInput">
-    <label for="totalCountdown">Init on : </label>
-    <input id="totalCountdown" type="text" [(ngModel)]="totalCountdown">
-</div> -->
-<!-- Creamos el botón para reinicilizar el contador -->
-<!-- <button (click)="compCountdow.startCountdown(); counterProgress = 0;">Restaurar</button>
-<router-outlet></router-outlet> -->
-
 <div>
-    <!--   <h1>Timers</h1> -->
-    <app-tabs>
-        <app-tab title="Timers">
-            <app-timer *ngFor="let time of timers" init="{{time}}" (onClomplete)="showEndTimerAlert()"></app-timer>
-        </app-tab>
-        <button class="add" (click)="showAddTimer()">+</button>
-        <app-tab title="Cromo"></app-tab>
-        <app-tab title="Alarm"></app-tab>
-    </app-tabs>
+  <app-tabs>
+    <app-tab title="Timers">
+      <app-timer *ngFor="let time of timers" init="{{time}}" (onClomplete)="showEndTimerAlert()"></app-timer>
+    </app-tab>
+    <button class="add" (click)="showAddTimer()">+</button>
+    <app-tab title="Cromo"></app-tab>
+    <app-tab title="Alarm"></app-tab>
+  </app-tabs>
 
 
 
 
-    <app-alert-view [hidden]="!isAddTimerVisible">
-        <div header>
-            My title para la alerta.
-        </div>
-        <label>Set the number of the seconds for your timer</label>
-        <input [(ngModel)]="time" type="number">
-        <button (click)="hideAddTimer()" class="cancel-button"> Cancel </button>
-        <button (click)="submitAddTimer()">OK</button>
-    </app-alert-view>
-    <app-alert-view [hidden]="!isEndTimerAlertVisible">
-        <div header>
-            Finished the process
-        </div>
-        <button (click)="hideEndTimerAlert()">OK</button>
-    </app-alert-view>
+  <app-alert-view [hidden]="!isAddTimerVisible">
+    <div header>
+      My title para la alerta.
+    </div>
+    <label>Set the number of the seconds for your timer</label>
+    <input [(ngModel)]="time" type="number">
+    <button (click)="hideAddTimer()" class="cancel-button"> Cancel </button>
+    <button (click)="submitAddTimer()">OK</button>
+  </app-alert-view>
+  <!-- <app-alert-view [hidden]="!isEndTimerAlertVisible">
+    <div header>
+      Finished the process
+    </div>
+    <button (click)="hideEndTimerAlert()">OK</button>
+  </app-alert-view> -->
+
+  <app-simple-alert-view
+  title="Timer Ended"
+  message = "Your countdown has Finished"
+  ></app-simple-alert-view>
+  <app-simple-alert-view></app-simple-alert-view>
 </div>

@@ -10,6 +10,7 @@ import { TimerComponent } from './componentes/timer/timer.component';
 import { AlertViewComponent } from './componentes/alert-view/alert-view.component';
 import { TabsComponent } from './componentes/tabs/tabs.component';
 import { TabComponent } from './componentes/tab/tab.component';
+import { SimpleAlertViewComponent } from './componentes/simple-alert-view/simple-alert-view.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { TabComponent } from './componentes/tab/tab.component';
     TimerComponent,
     AlertViewComponent,
     TabsComponent,
-    TabComponent
+    TabComponent,
+    SimpleAlertViewComponent
   ],
   imports: [
     BrowserModule,
