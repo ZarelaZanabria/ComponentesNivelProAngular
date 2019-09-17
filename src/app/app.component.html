@@ -11,10 +11,18 @@
 <router-outlet></router-outlet> -->
 
 <div>
-    <h1>Timers</h1>
-    <app-timer *ngFor="let time of timers" init="{{time}}" (onClomplete)="showEndTimerAlert()"></app-timer>
+    <!--   <h1>Timers</h1> -->
+    <app-tabs>
+        <app-tab title="Timers">
+            <app-timer *ngFor="let time of timers" init="{{time}}" (onClomplete)="showEndTimerAlert()"></app-timer>
+        </app-tab>
+        <button class="add" (click)="showAddTimer()">+</button>
+        <app-tab title="Cromo"></app-tab>
+        <app-tab title="Alarm"></app-tab>
+    </app-tabs>
 
-    <button class="add" (click)="showAddTimer()">+</button>
+
+
 
     <app-alert-view [hidden]="!isAddTimerVisible">
         <div header>

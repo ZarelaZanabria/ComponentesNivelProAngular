@@ -8,6 +8,8 @@ import { FormsModule } from '@angular/forms';
 import { DisplayComponent } from './componentes/display/display.component';
 import { TimerComponent } from './componentes/timer/timer.component';
 import { AlertViewComponent } from './componentes/alert-view/alert-view.component';
+import { TabsComponent } from './componentes/tabs/tabs.component';
+import { TabComponent } from './componentes/tab/tab.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +17,9 @@ import { AlertViewComponent } from './componentes/alert-view/alert-view.componen
     ProgressBarComponent,
     DisplayComponent,
     TimerComponent,
-    AlertViewComponent
+    AlertViewComponent,
+    TabsComponent,
+    TabComponent
   ],
   imports: [
     BrowserModule,
