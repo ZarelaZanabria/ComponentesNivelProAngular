@@ -36,9 +36,15 @@
     margin-right: 10px;
     background-color: #777777;
 
-    &active {
+    &:active {
       background-color: #444444;
     }
+  }
+
+  .time-in {
+    font-weight: 600;
+    color: #9932cc;
+    font-size: 12px;
   }
 }
 
