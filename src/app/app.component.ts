@@ -1,4 +1,4 @@
-import { Component,  ViewChildren,  AfterContentInit, QueryList, AfterViewInit } from '@angular/core';
+import { Component,  ViewChildren,  AfterContentInit, QueryList, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 import { SimpleAlertViewComponent } from './componentes/simple-alert-view/simple-alert-view.component';
 
 @Component({
@@ -9,27 +9,32 @@ import { SimpleAlertViewComponent } from './componentes/simple-alert-view/simple
 export class AppComponent implements AfterContentInit, AfterViewInit {
 
   
-  
   public isAddTimerVisible : boolean = false;
   public time : number = 0;
   public timers : Array<number> = [];
 
   @ViewChildren(SimpleAlertViewComponent) alerts : QueryList<SimpleAlertViewComponent>;
-  constructor () {
+  constructor (private  cRef : ChangeDetectorRef) {
     this.timers = [4,16,185];
 
   }
 
 
   logCountdowEnd() {
-    console.log("The countdown has  finished");
-    
+    console.log("The countdown has  finished");    
   }
   ngAfterViewInit() {
     this.alerts.forEach(item =>{
+
+      if(!item.title){
+        item.title = "Hi!";
+        item.message = "Welcome "
+      }
+      item.showAlert();
       console.log(item);
       
-    })
+    });
+    this.cRef.detectChanges();
   }
   ngAfterContentInit(): void {
    
@@ -51,7 +56,8 @@ export class AppComponent implements AfterContentInit, AfterViewInit {
   }
 
   public showEndTimerAlert(){
-    /* this.alert.showAlert(); */
+  this.alerts.first.showAlert();
+
   }
 
  
