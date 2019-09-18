@@ -16,7 +16,7 @@
       My title para la alerta.
     </div>
     <label>Set the number of the seconds for your timer</label>
-    <input [(ngModel)]="time" type="number">
+    <input [(ngModel)]="time" type="number" #timerInput>
     <button (click)="hideAddTimer()" class="cancel-button"> Cancel </button>
     <button (click)="submitAddTimer()">OK</button>
   </app-alert-view>
@@ -27,7 +27,7 @@
     <button (click)="hideEndTimerAlert()">OK</button>
   </app-alert-view> -->
 
-  <app-simple-alert-view
+  <app-simple-alert-view 
   title="Timer Ended"
   message = "Your countdown has Finished"
   ></app-simple-alert-view>
