@@ -1,4 +1,4 @@
-import { Component, ViewChildren, AfterContentInit, QueryList, AfterViewInit, ChangeDetectorRef, ViewChild, ElementRef } from '@angular/core';
+import { Component, AfterContentInit, AfterViewInit, ElementRef, ViewChild, Renderer2, ViewContainerRef, ComponentFactoryResolver, ComponentRef } from '@angular/core';
 import { SimpleAlertViewComponent } from './componentes/simple-alert-view/simple-alert-view.component';
 
 @Component({
@@ -6,16 +6,21 @@ import { SimpleAlertViewComponent } from './componentes/simple-alert-view/simple
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
+
+
 export class AppComponent implements AfterContentInit, AfterViewInit {
 
 
   public isAddTimerVisible: boolean = false;
   public time: number = 0;
   public timers: Array<number> = [];
+  //SimpleAlert devuelve la instancia del componente.
+  public simpleAlert: ComponentRef<SimpleAlertViewComponent> = null;
 
-  @ViewChildren(SimpleAlertViewComponent) alerts: QueryList<SimpleAlertViewComponent>;
-  @ViewChild("timerInput") timeInput: ElementRef;
-  constructor(private cRef: ChangeDetectorRef) {
+
+  @ViewChild('timerInput', {static : false}) timeInput: ElementRef;
+  @ViewChild('alert', { read: ViewContainerRef, static:false }) alertContainer: ViewContainerRef;
+  constructor(private renderer: Renderer2, private resolver: ComponentFactoryResolver) {
     this.timers = [4, 16, 185];
 
   }
@@ -27,22 +32,13 @@ export class AppComponent implements AfterContentInit, AfterViewInit {
   ngAfterViewInit() {
 
     console.log('TimerIMPUT', this.timeInput);
+
+    this.renderer.setAttribute(this.timeInput.nativeElement, "placeholder", "enter seconds");
     //Vamos agregar un atributo
-    this.timeInput.nativeElement.setAttibute("placeholder", "enter seconds");
-    this.timeInput.nativeElement.classList.add ("time-in");
+    this.renderer.addClass(this.timeInput.nativeElement, 'time-in');
 
 
-    this.alerts.forEach(item => {
 
-      if (!item.title) {
-        item.title = "Hi!";
-        item.message = "Welcome "
-      }
-      item.showAlert();
-      console.log(item);
-
-    });
-    this.cRef.detectChanges();
   }
   ngAfterContentInit(): void {
 
@@ -50,7 +46,10 @@ export class AppComponent implements AfterContentInit, AfterViewInit {
 
   public showAddTimer() {
     this.isAddTimerVisible = true;
+    setTimeout(() => {
 
+      this.renderer.selectRootElement(this.timeInput.nativeElement).focus();
+    });
   }
 
   public hideAddTimer() {
@@ -58,7 +57,15 @@ export class AppComponent implements AfterContentInit, AfterViewInit {
   }
 
   public showEndTimerAlert() {
-    this.alerts.first.showAlert();
+    const alertFactory = this.resolver.resolveComponentFactory(SimpleAlertViewComponent);
+    this.simpleAlert = this.alertContainer.createComponent(alertFactory);
+    this.simpleAlert.instance.title = "The Gamers";
+    this.simpleAlert.instance.message = "The game finished"
+    this.simpleAlert.instance.onDismiss.subscribe(() => {
+      console.log('this finisd');
+      this.simpleAlert.destroy();
+    })
+    this.simpleAlert.instance.showAlert();
 
   }
 

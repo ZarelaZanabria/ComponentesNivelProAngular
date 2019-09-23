@@ -29,10 +29,10 @@ export class TimerService {
     this.clearTimeout();
   }
 
-  restarCountdown(time?) {
+  restarCountdown(init?) {
 
-    if (time)
-      this.init = time;
+    if (init)
+      this.init = init;
     if (this.init && this.init > 0) {
       this.paused = true;
       this.clearTimeout();

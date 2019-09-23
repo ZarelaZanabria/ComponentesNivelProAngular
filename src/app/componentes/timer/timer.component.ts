@@ -20,7 +20,8 @@ export class TimerComponent implements OnInit, OnDestroy {
   public countdown : number = 0;
   /* Importanye los AYSNPIPE solo para HTML por eso nos subcribimos al observable
    */
-  constructor(public timerService: TimerService, private changeDetect: ChangeDetectorRef) {
+  constructor(public timerService: TimerService, 
+    private changeDetect: ChangeDetectorRef) {
 
   }
 

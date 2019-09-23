@@ -28,6 +28,9 @@ import { SimpleAlertViewComponent } from './componentes/simple-alert-view/simple
     AppRoutingModule,
     FormsModule,
   ],
+  entryComponents: [
+    SimpleAlertViewComponent
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })

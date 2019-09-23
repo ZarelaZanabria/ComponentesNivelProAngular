@@ -1,4 +1,4 @@
-<div *ngIf="visible">
+<ng-container *ngIf="visible">
     <div class="background"></div>
     <div class="card">
         <div class="header">
@@ -8,7 +8,7 @@
             {{message}}
         </div>
         <div class="footer">
-            <button (click)="dismiss()">Ok</button>
+            <button  (click)="dismiss()">Ok</button>
         </div>
     </div>
-</div>
+</ng-container>
